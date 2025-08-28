@@ -8,22 +8,24 @@ cd hardhat
 npm init -y
 npm i -D hardhat@2
 npx hardhat init
+```
 
+```cmd
 cd hardhat
 npx hardhat compile
 npm test
 ```
 
 ```cmd
-
+cd hardhat
+npx hardhat node
+<!-- or -->
+npm start
 ```
 
 ```cmd
-
-```
-
-```cmd
-
+cd hardhat
+npm run deploy
 ```
 
 ```cmd
