@@ -1,4 +1,4 @@
-# web3-002-ef-techs-for-dummies-hardhat
+# web3-002-ef-techs-for-dummies
 
 # Notes:
 
