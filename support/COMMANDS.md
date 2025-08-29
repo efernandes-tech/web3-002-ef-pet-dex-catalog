@@ -46,7 +46,10 @@ npm run deploy:prod
 ```
 
 ```cmd
+cd hardhat
+npm i -D @nomiclabs/hardhat-etherscan
 
+npx hardhat verify --network sepolia 0x98E675928B647F7d3059a442526ad5FA07f5cA9C
 ```
 
 ```cmd
