@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ethers } from 'ethers';
-import { useState } from 'react';
-
-import { TechsForDummiesABI } from '@/contracts/TechsForDummiesABI';
 import type { Tech, TechWithId } from '@/types/contract';
+import { ethers } from 'ethers';
+import { useEffect, useState } from 'react';
+import { TechsForDummiesABI } from '../contracts/TechsForDummiesABI';
 
 // Replace with your contract address
 const CONTRACT_ADDRESS = '0x98E675928B647F7d3059a442526ad5FA07f5cA9C';
@@ -18,11 +16,9 @@ export const useContract = () => {
     const [account, setAccount] = useState<string>('');
 
     const connectWallet = async () => {
-        if ((window as any).ethereum) {
+        if (window.ethereum) {
             try {
-                const provider = new ethers.BrowserProvider(
-                    (window as any).ethereum,
-                );
+                const provider = new ethers.BrowserProvider(window.ethereum);
                 await provider.send('eth_requestAccounts', []);
                 const signer = await provider.getSigner();
                 const contract = new ethers.Contract(
@@ -40,6 +36,57 @@ export const useContract = () => {
             }
         }
     };
+
+    const checkConnection = async () => {
+        if (window.ethereum) {
+            try {
+                const provider = new ethers.BrowserProvider(window.ethereum);
+                const accounts = await provider.listAccounts();
+
+                if (accounts.length > 0) {
+                    const signer = await provider.getSigner();
+                    const contract = new ethers.Contract(
+                        CONTRACT_ADDRESS,
+                        TechsForDummiesABI,
+                        signer,
+                    );
+
+                    setProvider(provider);
+                    setSigner(signer);
+                    setContract(contract);
+                    setAccount(await signer.getAddress());
+                }
+            } catch (error) {
+                console.error('Failed to check connection:', error);
+            }
+        }
+    };
+
+    useEffect(() => {
+        checkConnection();
+
+        // Listen for account changes
+        if (window.ethereum) {
+            window.ethereum.on('accountsChanged', (accounts: string[]) => {
+                if (accounts.length === 0) {
+                    // Disconnected
+                    setProvider(null);
+                    setSigner(null);
+                    setContract(null);
+                    setAccount('');
+                } else {
+                    // Account changed, reconnect
+                    checkConnection();
+                }
+            });
+        }
+
+        return () => {
+            if (window.ethereum) {
+                window.ethereum.removeAllListeners('accountsChanged');
+            }
+        };
+    }, []);
 
     const addTech = async (tech: Tech) => {
         if (!contract) return;
