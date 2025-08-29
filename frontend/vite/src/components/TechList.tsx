@@ -15,7 +15,7 @@ interface TechListProps {
     onDelete: (id: number) => void;
 }
 
-export const TechList = ({ techs, onEdit, onDelete }: TechListProps) => {
+const TechList = ({ techs, onEdit, onDelete }: TechListProps) => {
     return (
         <VStack gap={4} align="stretch">
             <Heading size="lg">Technologies</Heading>
@@ -63,3 +63,5 @@ export const TechList = ({ techs, onEdit, onDelete }: TechListProps) => {
         </VStack>
     );
 };
+
+export default TechList;

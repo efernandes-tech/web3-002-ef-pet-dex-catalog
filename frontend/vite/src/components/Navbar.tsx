@@ -1,60 +1,121 @@
 import { useContract } from '@/hooks/useContract';
+import { getExplorerUrl, isCorrectNetwork } from '@/utils/contract';
 import {
     Box,
     Button,
     Container,
     Heading,
     HStack,
-    Text,
+    Icon,
+    Link,
+    Menu,
+    Portal,
+    VStack,
 } from '@chakra-ui/react';
+import { MdArrowOutward } from 'react-icons/md';
 import { Link as RouterLink } from 'react-router-dom';
+import ContractInfo, { CONTRACT_ADDRESS } from './ContractInfo';
 
 const Navbar = () => {
-    const { account, isConnected, connectWallet } = useContract();
+    const { account, chainId, isConnected, connectWallet, disconnectWallet } =
+        useContract();
+
+    const explorerUrl = getExplorerUrl(CONTRACT_ADDRESS);
+    const correctNetwork = isCorrectNetwork(chainId || 0);
 
     return (
         <Box bg="white" boxShadow="sm" position="sticky" top={0} zIndex={10}>
             <Container maxW="7xl" py={4}>
-                <HStack justify="space-between" align="center">
-                    <Heading
-                        asChild
-                        size="lg"
-                        color="blue.600"
-                        _hover={{ color: 'blue.700' }}
-                    >
-                        <RouterLink to="/">Techs For Dummies</RouterLink>
-                    </Heading>
+                <VStack gap={0} align="stretch">
+                    <HStack justify="space-between" align="center" py={4}>
+                        <Heading
+                            asChild
+                            size="lg"
+                            color="blue.600"
+                            _hover={{ color: 'blue.700' }}
+                        >
+                            <RouterLink to="/">Techs For Dummies</RouterLink>
+                        </Heading>
 
-                    <HStack gap={4}>
-                        {isConnected ? (
-                            <>
-                                <Button asChild variant="ghost" size="sm">
-                                    <RouterLink to="/technologies">
-                                        Technologies
-                                    </RouterLink>
+                        <HStack gap={4}>
+                            {isConnected ? (
+                                <>
+                                    <Button asChild variant="ghost" size="sm">
+                                        <RouterLink to="/technologies">
+                                            Technologies
+                                        </RouterLink>
+                                    </Button>
+
+                                    <Button asChild variant="ghost" size="sm">
+                                        <RouterLink to="/add-tech">
+                                            Add Tech
+                                        </RouterLink>
+                                    </Button>
+
+                                    {correctNetwork && (
+                                        <Link
+                                            href={explorerUrl}
+                                            color="gray.600"
+                                            fontSize="sm"
+                                            fontWeight="medium"
+                                            _hover={{ color: 'blue.600' }}
+                                        >
+                                            Contract Scan
+                                            <Icon
+                                                as={MdArrowOutward}
+                                                ml={1}
+                                                boxSize="3"
+                                            />
+                                        </Link>
+                                    )}
+
+                                    <Menu.Root>
+                                        <Menu.Trigger asChild>
+                                            <Button
+                                                as={Button}
+                                                // variant="outline"
+                                                size="sm"
+                                                // icon={<ChevronDownIcon />}
+                                            >
+                                                {account.slice(0, 6)}...
+                                                {account.slice(-4)}
+                                            </Button>
+                                        </Menu.Trigger>
+                                        <Portal>
+                                            <Menu.Positioner>
+                                                <Menu.Content>
+                                                    <Menu.Item
+                                                        value=""
+                                                        onClick={
+                                                            disconnectWallet
+                                                        }
+                                                        color="red.600"
+                                                    >
+                                                        Disconnect Wallet
+                                                    </Menu.Item>
+                                                </Menu.Content>
+                                            </Menu.Positioner>
+                                        </Portal>
+                                    </Menu.Root>
+                                </>
+                            ) : (
+                                <Button
+                                    onClick={connectWallet}
+                                    colorScheme="blue"
+                                    size="sm"
+                                >
+                                    Connect Wallet
                                 </Button>
-
-                                <Button asChild variant="ghost" size="sm">
-                                    <RouterLink to="/add-tech">
-                                        Add Tech
-                                    </RouterLink>
-                                </Button>
-
-                                <Text fontSize="sm" color="gray.600">
-                                    {account.slice(0, 6)}...{account.slice(-4)}
-                                </Text>
-                            </>
-                        ) : (
-                            <Button
-                                onClick={connectWallet}
-                                colorScheme="blue"
-                                size="sm"
-                            >
-                                Connect Wallet
-                            </Button>
-                        )}
+                            )}
+                        </HStack>
                     </HStack>
-                </HStack>
+
+                    {isConnected && (
+                        <Box pb={3}>
+                            <ContractInfo />
+                        </Box>
+                    )}
+                </VStack>
             </Container>
         </Box>
     );

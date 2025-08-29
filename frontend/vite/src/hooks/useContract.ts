@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { CONTRACT_ADDRESS } from '@/components/ContractInfo';
 import type { Tech, TechWithId } from '@/types/contract';
 import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import { TechsForDummiesABI } from '../contracts/TechsForDummiesABI';
-
-// Replace with your contract address
-const CONTRACT_ADDRESS = '0x98E675928B647F7d3059a442526ad5FA07f5cA9C';
 
 export const useContract = () => {
     const [provider, setProvider] = useState<ethers.BrowserProvider | null>(
@@ -14,6 +12,7 @@ export const useContract = () => {
     const [signer, setSigner] = useState<ethers.JsonRpcSigner | null>(null);
     const [contract, setContract] = useState<ethers.Contract | null>(null);
     const [account, setAccount] = useState<string>('');
+    const [chainId, setChainId] = useState<number | null>(null);
 
     const connectWallet = async () => {
         if (window.ethereum) {
@@ -26,15 +25,25 @@ export const useContract = () => {
                     TechsForDummiesABI,
                     signer,
                 );
+                const network = await provider.getNetwork();
 
                 setProvider(provider);
                 setSigner(signer);
                 setContract(contract);
                 setAccount(await signer.getAddress());
+                setChainId(Number(network.chainId));
             } catch (error) {
                 console.error('Failed to connect wallet:', error);
             }
         }
+    };
+
+    const disconnectWallet = () => {
+        setProvider(null);
+        setSigner(null);
+        setContract(null);
+        setAccount('');
+        setChainId(null);
     };
 
     const checkConnection = async () => {
@@ -50,11 +59,13 @@ export const useContract = () => {
                         TechsForDummiesABI,
                         signer,
                     );
+                    const network = await provider.getNetwork();
 
                     setProvider(provider);
                     setSigner(signer);
                     setContract(contract);
                     setAccount(await signer.getAddress());
+                    setChainId(Number(network.chainId));
                 }
             } catch (error) {
                 console.error('Failed to check connection:', error);
@@ -79,11 +90,18 @@ export const useContract = () => {
                     checkConnection();
                 }
             });
+
+            // Listen for chain changes
+            window.ethereum.on('chainChanged', (chainId: string) => {
+                setChainId(parseInt(chainId, 16));
+                checkConnection();
+            });
         }
 
         return () => {
             if (window.ethereum) {
                 window.ethereum.removeAllListeners('accountsChanged');
+                window.ethereum.removeAllListeners('chainChanged');
             }
         };
     }, []);
@@ -161,12 +179,14 @@ export const useContract = () => {
 
     return {
         connectWallet,
+        disconnectWallet,
         addTech,
         editTech,
         removeTech,
         getTech,
         getAllTechs,
         account,
+        chainId,
         isConnected: !!contract,
     };
 };

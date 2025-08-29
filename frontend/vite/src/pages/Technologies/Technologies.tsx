@@ -1,4 +1,4 @@
-import { TechList } from '@/components/TechList';
+import TechList from '@/components/TechList';
 import { useContract } from '@/hooks/useContract';
 import type { TechWithId } from '@/types/contract';
 import { Center, Container, Heading, Spinner, VStack } from '@chakra-ui/react';

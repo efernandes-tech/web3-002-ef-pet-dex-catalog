@@ -1,4 +1,4 @@
-import { TechForm } from '@/components/TechForm';
+import TechForm from '@/components/TechForm';
 import { toaster } from '@/components/ui/toaster';
 import { useContract } from '@/hooks/useContract';
 import type { Tech, TechWithId } from '@/types/contract';

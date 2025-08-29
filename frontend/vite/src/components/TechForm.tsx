@@ -17,7 +17,7 @@ interface TechFormProps {
     isEditing?: boolean;
 }
 
-export const TechForm = ({
+const TechForm = ({
     onSubmit,
     initialTech,
     isEditing = false,
@@ -93,3 +93,5 @@ export const TechForm = ({
         </Box>
     );
 };
+
+export default TechForm;
