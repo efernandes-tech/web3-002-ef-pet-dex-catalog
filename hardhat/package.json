@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npx hardhat node",
     "test": "npx hardhat test",
-    "deploy": "npx hardhat ignition deploy ignition/modules/TechsForDummies.ts --network local"
+    "deploy:dev": "npx hardhat ignition deploy ignition/modules/TechsForDummies.ts --network local",
+    "deploy:prod": "npx hardhat ignition deploy ignition/modules/TechsForDummies.ts --network sepolia"
   },
   "keywords": [],
   "author": "efernandes.tech",
@@ -14,5 +15,8 @@
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^6.1.0",
     "hardhat": "^2.26.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.1"
   }
 }

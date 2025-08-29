@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import '@nomicfoundation/hardhat-toolbox';
 import { HardhatUserConfig } from 'hardhat/config';
 
@@ -11,6 +14,13 @@ const config: HardhatUserConfig = {
             accounts: {
                 mnemonic:
                     'test test test test test test test test test test test junk',
+            },
+        },
+        sepolia: {
+            url: process.env.INFURA_URL,
+            chainId: 11155111,
+            accounts: {
+                mnemonic: process.env.SECRET,
             },
         },
     },

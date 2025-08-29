@@ -29,15 +29,20 @@ npm run deploy
 ```
 
 ```cmd
-
+cd hardhat
+npx hardhat console
+> const contract = ethers.getContractAt("TechsForDummies", "DEPLOY_ADDRESS")
+> await contract.techs(1)
 ```
 
 ```cmd
-
+cd hardhat
+npm i dotenv
 ```
 
 ```cmd
-
+cd hardhat
+npm run deploy:prod
 ```
 
 ```cmd
