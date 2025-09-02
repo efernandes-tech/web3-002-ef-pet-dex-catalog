@@ -14,4 +14,3 @@ export interface WalletContextType {
 export const WalletContext = createContext<WalletContextType | undefined>(
     undefined,
 );
-
