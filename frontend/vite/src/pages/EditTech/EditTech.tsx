@@ -28,10 +28,7 @@ const EditTech = () => {
                             description: 'Technology not found',
                             type: 'error',
                             duration: 3000,
-                            action: {
-                                label: 'Undo',
-                                onClick: () => console.log('Undo'),
-                            },
+                            closable: true,
                         });
                         navigate('/technologies');
                     }
@@ -54,10 +51,7 @@ const EditTech = () => {
                 description: 'Technology updated successfully',
                 type: 'success',
                 duration: 3000,
-                action: {
-                    label: 'Undo',
-                    onClick: () => console.log('Undo'),
-                },
+                closable: true,
             });
             navigate('/technologies');
         } catch (error) {
@@ -67,10 +61,7 @@ const EditTech = () => {
                 description: 'Failed to update technology',
                 type: 'error',
                 duration: 3000,
-                action: {
-                    label: 'Undo',
-                    onClick: () => console.log('Undo'),
-                },
+                closable: true,
             });
         }
     };

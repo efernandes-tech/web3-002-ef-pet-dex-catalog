@@ -26,6 +26,7 @@ npx @chakra-ui/cli snippet add provider
 cd ./frontend/vite
 npm install ethers
 npx @chakra-ui/cli snippet add toaster
+npm install lucide-react
 ```
 
 ```cmd

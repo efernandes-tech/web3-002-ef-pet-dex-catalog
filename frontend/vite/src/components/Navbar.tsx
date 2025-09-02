@@ -6,13 +6,12 @@ import {
     Container,
     Heading,
     HStack,
-    Icon,
     Link,
     Menu,
     Portal,
     VStack,
 } from '@chakra-ui/react';
-import { MdArrowOutward } from 'react-icons/md';
+import { MoveUpRight } from 'lucide-react';
 import { Link as RouterLink } from 'react-router-dom';
 import ContractInfo, { CONTRACT_ADDRESS } from './ContractInfo';
 
@@ -61,10 +60,8 @@ const Navbar = () => {
                                             _hover={{ color: 'blue.600' }}
                                         >
                                             Contract Scan
-                                            <Icon
-                                                as={MdArrowOutward}
-                                                ml={1}
-                                                boxSize="3"
+                                            <MoveUpRight
+                                                style={{ marginLeft: 1 }}
                                             />
                                         </Link>
                                     )}

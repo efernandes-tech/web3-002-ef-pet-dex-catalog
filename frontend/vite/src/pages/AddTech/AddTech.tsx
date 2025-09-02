@@ -17,10 +17,7 @@ const AddTech = () => {
                 description: 'Technology added successfully',
                 type: 'success',
                 duration: 3000,
-                action: {
-                    label: 'Undo',
-                    onClick: () => console.log('Undo'),
-                },
+                closable: true,
             });
             navigate('/technologies');
         } catch (error) {
@@ -30,10 +27,7 @@ const AddTech = () => {
                 description: 'Failed to add technology',
                 type: 'error',
                 duration: 3000,
-                action: {
-                    label: 'Undo',
-                    onClick: () => console.log('Undo'),
-                },
+                closable: true,
             });
         }
     };

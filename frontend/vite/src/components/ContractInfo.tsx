@@ -1,5 +1,5 @@
-import { Alert, Badge, Box, HStack, Icon, Link, Text } from '@chakra-ui/react';
-import { MdArrowOutward } from 'react-icons/md';
+import { Alert, Badge, Box, HStack, Link, Text } from '@chakra-ui/react';
+import { MoveUpRight } from 'lucide-react';
 import { useContract } from '../hooks/useContract';
 import {
     getExplorerUrl,
@@ -60,7 +60,7 @@ const ContractInfo = () => {
                     _hover={{ color: 'blue.700' }}
                 >
                     View on Sepolia Etherscan
-                    <Icon as={MdArrowOutward} ml={1} />
+                    <MoveUpRight style={{ marginLeft: 1 }} />
                 </Link>
             </HStack>
         </Box>
