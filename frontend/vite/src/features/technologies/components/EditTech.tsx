@@ -1,10 +1,10 @@
-import TechForm from '@/components/TechForm';
 import { toaster } from '@/components/ui/toaster';
-import { useContract } from '@/hooks/useContract';
+import { useContract } from '@/features/contract';
 import type { Tech, TechWithId } from '@/types/contract';
 import { Center, Container, Heading, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import TechForm from './TechForm';
 
 const EditTech = () => {
     const { id } = useParams<{ id: string }>();

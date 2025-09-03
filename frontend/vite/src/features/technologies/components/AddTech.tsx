@@ -1,9 +1,9 @@
-import TechForm from '@/components/TechForm';
 import { toaster } from '@/components/ui/toaster';
-import { useContract } from '@/hooks/useContract';
+import { useContract } from '@/features/contract';
 import type { Tech } from '@/types/contract';
 import { Center, Container, Heading, VStack } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import TechForm from './TechForm';
 
 const AddTech = () => {
     const { addTech, isConnected } = useContract();

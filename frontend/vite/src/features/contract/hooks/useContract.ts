@@ -1,16 +1,16 @@
-import { CONTRACT_ADDRESS } from '@/components/ContractInfo';
-import { useWallet } from '@/hooks/useWallet';
+import { useWallet } from '@/features/wallet';
 import type { Tech, TechWithId } from '@/types/contract';
 import { ethers } from 'ethers';
 import { useMemo } from 'react';
-import { TechsForDummiesABI } from '../contracts/TechsForDummiesABI';
+import { TechsForDummiesABI } from '../../../contracts/TechsForDummiesABI';
+import { CONTRACT_ADDRESS } from '../components/ContractInfo';
 
 export const useContract = () => {
     const { signer, isConnected, ...walletProps } = useWallet();
 
     const contract = useMemo(() => {
         if (!signer || !isConnected) return null;
-        
+
         return new ethers.Contract(
             CONTRACT_ADDRESS,
             TechsForDummiesABI,

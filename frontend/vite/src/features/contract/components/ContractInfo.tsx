@@ -7,7 +7,6 @@ import {
     isCorrectNetwork,
 } from '../utils/contract';
 
-// Replace with your actual contract address
 export const CONTRACT_ADDRESS = '0x98E675928B647F7d3059a442526ad5FA07f5cA9C';
 
 const ContractInfo = () => {

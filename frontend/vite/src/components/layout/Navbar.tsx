@@ -1,5 +1,6 @@
-import { useWallet } from '@/hooks/useWallet';
-import { getExplorerUrl, isCorrectNetwork } from '@/utils/contract';
+import { toaster } from '@/components/ui/toaster';
+import { getExplorerUrl } from '@/features/contract';
+import { useWallet } from '@/features/wallet';
 import {
     Badge,
     Box,
@@ -8,22 +9,24 @@ import {
     Flex,
     Heading,
     HStack,
-    Link,
     Menu,
     Portal,
     Text,
     VStack,
 } from '@chakra-ui/react';
-import { ChevronDown, ExternalLink, Wallet } from 'lucide-react';
+import {
+    ChevronDown,
+    Copy,
+    ExternalLink,
+    Settings,
+    User,
+    Wallet,
+} from 'lucide-react';
 import { Link as RouterLink } from 'react-router-dom';
-import { CONTRACT_ADDRESS } from './ContractInfo';
 
 const Navbar = () => {
     const { account, chainId, isConnected, connectWallet, disconnectWallet } =
         useWallet();
-
-    const explorerUrl = getExplorerUrl(CONTRACT_ADDRESS);
-    const correctNetwork = isCorrectNetwork(chainId || 0);
 
     const getNetworkName = () => {
         const networks = {
@@ -32,6 +35,36 @@ const Navbar = () => {
             1337: 'Localhost',
         } as const;
         return networks[chainId as keyof typeof networks] || 'Unknown';
+    };
+
+    const copyAddressToClipboard = async () => {
+        if (account) {
+            try {
+                await navigator.clipboard.writeText(account);
+                toaster.create({
+                    title: 'Address Copied',
+                    description: 'Wallet address copied to clipboard',
+                    type: 'success',
+                    duration: 2000,
+                    closable: true,
+                });
+            } catch {
+                toaster.create({
+                    title: 'Copy Failed',
+                    description: 'Failed to copy address to clipboard',
+                    type: 'error',
+                    duration: 3000,
+                    closable: true,
+                });
+            }
+        }
+    };
+
+    const viewOnExplorer = () => {
+        if (account) {
+            const explorerUrl = getExplorerUrl(account);
+            window.open(explorerUrl, '_blank', 'noopener,noreferrer');
+        }
     };
 
     return (
@@ -54,7 +87,6 @@ const Navbar = () => {
                             </RouterLink>
                         </Heading>
 
-                        {/* Navigation */}
                         <HStack gap={4}>
                             {isConnected && (
                                 <>
@@ -69,24 +101,6 @@ const Navbar = () => {
                                             Add Technology
                                         </RouterLink>
                                     </Button>
-
-                                    {correctNetwork && (
-                                        <Link
-                                            href={explorerUrl}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            display="flex"
-                                            alignItems="center"
-                                            gap={1}
-                                            color="gray.600"
-                                            fontSize="sm"
-                                            fontWeight="medium"
-                                            _hover={{ color: 'blue.600' }}
-                                        >
-                                            Contract Scan
-                                            <ExternalLink size={12} />
-                                        </Link>
-                                    )}
 
                                     {chainId && (
                                         <Badge colorScheme="blue" size="sm">
@@ -107,12 +121,67 @@ const Navbar = () => {
                                             <Menu.Positioner>
                                                 <Menu.Content>
                                                     <Menu.Item
+                                                        value="copy"
+                                                        onClick={
+                                                            copyAddressToClipboard
+                                                        }
+                                                    >
+                                                        <Copy size={14} />
+                                                        Copy Address
+                                                    </Menu.Item>
+
+                                                    <Menu.Item
+                                                        value="explorer"
+                                                        onClick={viewOnExplorer}
+                                                    >
+                                                        <ExternalLink
+                                                            size={14}
+                                                        />
+                                                        View on Explorer
+                                                    </Menu.Item>
+
+                                                    <Menu.Separator />
+
+                                                    <Menu.Item
+                                                        value="profile"
+                                                        disabled
+                                                        color="gray.400"
+                                                    >
+                                                        <User size={14} />
+                                                        Account Details
+                                                        <Text
+                                                            fontSize="xs"
+                                                            ml="auto"
+                                                        >
+                                                            Soon
+                                                        </Text>
+                                                    </Menu.Item>
+
+                                                    <Menu.Item
+                                                        value="settings"
+                                                        disabled
+                                                        color="gray.400"
+                                                    >
+                                                        <Settings size={14} />
+                                                        Settings
+                                                        <Text
+                                                            fontSize="xs"
+                                                            ml="auto"
+                                                        >
+                                                            Soon
+                                                        </Text>
+                                                    </Menu.Item>
+
+                                                    <Menu.Separator />
+
+                                                    <Menu.Item
                                                         value="disconnect"
                                                         onClick={
                                                             disconnectWallet
                                                         }
                                                         color="red.600"
                                                     >
+                                                        <Wallet size={14} />
                                                         Disconnect Wallet
                                                     </Menu.Item>
                                                 </Menu.Content>

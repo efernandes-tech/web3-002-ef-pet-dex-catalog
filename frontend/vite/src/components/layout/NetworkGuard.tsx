@@ -1,5 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+    isCorrectNetwork,
+    SEPOLIA_CHAIN_ID,
+    useContract,
+} from '@/features/contract';
+import {
     Alert,
     AlertDescription,
     AlertIndicator,
@@ -9,8 +14,6 @@ import {
     VStack,
 } from '@chakra-ui/react';
 import type { ReactNode } from 'react';
-import { useContract } from '../hooks/useContract';
-import { isCorrectNetwork, SEPOLIA_CHAIN_ID } from '../utils/contract';
 
 interface NetworkGuardProps {
     children: ReactNode;
@@ -27,7 +30,6 @@ const NetworkGuard = ({ children }: NetworkGuardProps) => {
                     params: [{ chainId: `0x${SEPOLIA_CHAIN_ID.toString(16)}` }],
                 });
             } catch (error: any) {
-                // Chain doesn't exist, add it
                 if (error.code === 4902) {
                     try {
                         await window.ethereum.request({

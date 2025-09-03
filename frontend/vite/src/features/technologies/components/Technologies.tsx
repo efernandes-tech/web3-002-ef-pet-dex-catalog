@@ -1,9 +1,9 @@
-import TechList from '@/components/TechList';
-import { useContract } from '@/hooks/useContract';
+import { useContract } from '@/features/contract';
 import type { TechWithId } from '@/types/contract';
 import { Center, Container, Heading, Spinner, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import TechList from './TechList';
 
 const Technologies = () => {
     const { removeTech, getAllTechs, isConnected } = useContract();

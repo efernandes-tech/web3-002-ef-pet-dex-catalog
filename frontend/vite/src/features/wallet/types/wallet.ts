@@ -1,5 +1,4 @@
 import { ethers } from 'ethers';
-import { createContext } from 'react';
 
 export interface WalletContextType {
     provider: ethers.BrowserProvider | null;
@@ -10,7 +9,3 @@ export interface WalletContextType {
     connectWallet: () => Promise<void>;
     disconnectWallet: () => void;
 }
-
-export const WalletContext = createContext<WalletContextType | undefined>(
-    undefined,
-);

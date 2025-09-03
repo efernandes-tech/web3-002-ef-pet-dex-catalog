@@ -1,10 +1,15 @@
-import { WalletContext, type WalletContextType } from '@/contexts/wallet';
+import type { WalletContextType } from '@/types';
 import { ethers } from 'ethers';
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 
 interface WalletProviderProps {
     children: React.ReactNode;
 }
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const WalletContext = createContext<WalletContextType | undefined>(
+    undefined,
+);
 
 export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
     const [provider, setProvider] = useState<ethers.BrowserProvider | null>(
