@@ -1,31 +1,17 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import { Layout, NetworkGuard } from './components';
-import { AddTech, EditTech, Technologies } from './features/technologies';
-import { WalletProvider } from './features/wallet';
-import Home from './pages/Home/Home';
+import NetworkGuard from './components/common/NetworkGuard';
+import { Provider } from './components/ui/Provider';
+import { WalletProvider } from './context/WalletContext';
+import Routes from './routes';
 
 const App = () => {
     return (
-        <WalletProvider>
-            <Router>
+        <Provider>
+            <WalletProvider>
                 <NetworkGuard>
-                    <Routes>
-                        <Route path="/" element={<Layout />}>
-                            <Route index element={<Home />} />
-                            <Route
-                                path="technologies"
-                                element={<Technologies />}
-                            />
-                            <Route path="add-tech" element={<AddTech />} />
-                            <Route
-                                path="edit-tech/:id"
-                                element={<EditTech />}
-                            />
-                        </Route>
-                    </Routes>
+                    <Routes />
                 </NetworkGuard>
-            </Router>
-        </WalletProvider>
+            </WalletProvider>
+        </Provider>
     );
 };
 

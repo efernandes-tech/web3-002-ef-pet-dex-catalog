@@ -11,6 +11,7 @@ const config = defineConfig({
         tokens: {
             colors: {
                 primary: { value: '#272A5B' },
+                secondary: { value: '#E67E22' },
             },
         },
     },
