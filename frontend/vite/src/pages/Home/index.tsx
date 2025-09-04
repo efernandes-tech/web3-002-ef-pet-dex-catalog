@@ -76,18 +76,18 @@ const Home = () => {
                             mx="auto"
                             lineHeight="tall"
                         >
-                            Discover, manage, and track cutting-edge pets on the
-                            blockchain. A decentralized platform built for pet
-                            enthusiasts.
+                            Your comprehensive digital pet registry on the blockchain.
+                            Catalog, manage, and explore pets with complete transparency
+                            and ownership verification.
                         </Text>
                     </Box>
 
                     <HStack gap={4} flexWrap="wrap" justify="center">
                         <Badge colorScheme="blue" px={3} py={1} rounded="full">
-                            Decentralized
+                            Pet Registry
                         </Badge>
                         <Badge colorScheme="green" px={3} py={1} rounded="full">
-                            Transparent
+                            Ownership Verified
                         </Badge>
                         <Badge
                             colorScheme="purple"
@@ -95,7 +95,7 @@ const Home = () => {
                             py={1}
                             rounded="full"
                         >
-                            Community-Driven
+                            Immutable Records
                         </Badge>
                     </HStack>
 
@@ -105,21 +105,21 @@ const Home = () => {
                                 size={20}
                                 color="var(--chakra-colors-blue-500)"
                             />
-                            <Text color="gray.600">Fast & Secure</Text>
+                            <Text color="gray.600">Digital Catalog</Text>
                         </Flex>
                         <Flex align="center" gap={2}>
                             <Shield
                                 size={20}
                                 color="var(--chakra-colors-green-500)"
                             />
-                            <Text color="gray.600">Blockchain Powered</Text>
+                            <Text color="gray.600">Verified Records</Text>
                         </Flex>
                         <Flex align="center" gap={2}>
                             <Users
                                 size={20}
                                 color="var(--chakra-colors-purple-500)"
                             />
-                            <Text color="gray.600">Community Built</Text>
+                            <Text color="gray.600">Pet Community</Text>
                         </Flex>
                     </HStack>
                 </VStack>
@@ -136,9 +136,9 @@ const Home = () => {
                             Connect Your Wallet
                         </Heading>
                         <Text fontSize="lg" color="gray.600" maxW="2xl">
-                            Start your journey by connecting your Web3 wallet to
-                            interact with our smart contract and manage pets on
-                            the blockchain.
+                            Connect your Web3 wallet to access the Pet Dex Catalog.
+                            Register new pets, update pet information, and explore
+                            the complete digital pet registry.
                         </Text>
                     </Box>
 
@@ -153,8 +153,8 @@ const Home = () => {
                                         />
                                     </Box>
                                     <Text color="gray.600">
-                                        Connect your wallet to access all
-                                        features and start managing pets.
+                                        Connect your wallet to access the pet catalog
+                                        and start registering your pets.
                                     </Text>
                                     <Button
                                         onClick={handleConnectWallet}
@@ -219,7 +219,7 @@ const Home = () => {
                                             w="full"
                                         >
                                             <RouterLink to="/pets">
-                                                View Pets{' '}
+                                                Browse Pet Catalog{' '}
                                                 <ChevronRight size={16} />
                                             </RouterLink>
                                         </Button>
@@ -231,7 +231,7 @@ const Home = () => {
                                             w="full"
                                         >
                                             <RouterLink to="/add-pet">
-                                                Add New Pet
+                                                Register Pet
                                             </RouterLink>
                                         </Button>
                                     </VStack>
@@ -250,11 +250,12 @@ const Home = () => {
                 <VStack gap={12}>
                     <Box textAlign="center">
                         <Heading size="2xl" color="gray.900" mb={4}>
-                            Understanding Our Smart Contract
+                            Pet Dex Catalog Smart Contract
                         </Heading>
                         <Text fontSize="lg" color="gray.600" maxW="3xl">
-                            Learn how our PetDexCatalog.sol contract works and
-                            what makes it secure and efficient.
+                            Our PetDexCatalog smart contract provides a secure,
+                            decentralized registry for pet information with full
+                            ownership verification and data integrity.
                         </Text>
                     </Box>
 
@@ -286,8 +287,8 @@ const Home = () => {
                                                 fontSize="sm"
                                                 color="gray.600"
                                             >
-                                                Adds new pet entries with name,
-                                                description, and adopter count
+                                                Registers new pets with name,
+                                                description, and birth year
                                             </Text>
                                         </Box>
                                         <Box>
@@ -301,8 +302,8 @@ const Home = () => {
                                                 fontSize="sm"
                                                 color="gray.600"
                                             >
-                                                Updates existing pet information
-                                                with validation
+                                                Modifies pet catalog entries with
+                                                data validation
                                             </Text>
                                         </Box>
                                         <Box>
@@ -316,8 +317,8 @@ const Home = () => {
                                                 fontSize="sm"
                                                 color="gray.600"
                                             >
-                                                Owner-only function to remove
-                                                pets (restricted access)
+                                                Removes pets from catalog
+                                                (contract owner only)
                                             </Text>
                                         </Box>
                                     </VStack>
@@ -406,8 +407,7 @@ const Home = () => {
                                             color="gray.600"
                                             mb={3}
                                         >
-                                            The contract uses a simple but
-                                            effective data structure:
+                                            Each pet in the catalog contains:
                                         </Text>
                                         <Box
                                             bg="white"
@@ -449,7 +449,7 @@ const Home = () => {
             {
                 id: 'a',
                 question: 'What is Pet Dex Catalog?',
-                answer: 'Pet Dex Catalog is a decentralized platform built on blockchain pet that allows users to discover, manage, and track cutting-edge pets. It uses smart contracts to ensure transparency and community governance.',
+                answer: 'Pet Dex Catalog is a decentralized pet registry built on blockchain technology. It allows pet owners to create permanent, verifiable records of their pets with complete ownership history and detailed information stored securely on-chain.',
             },
             {
                 id: 'b',
@@ -459,22 +459,22 @@ const Home = () => {
             {
                 id: 'c',
                 question: 'What can I do with my connected wallet?',
-                answer: 'Once connected, you can add new pets to the platform, view existing pets, edit pet information, and interact with our smart contract. Your wallet serves as your identity and authorization method.',
+                answer: 'With a connected wallet, you can register new pets in the catalog, browse existing pet records, update pet information, and maintain a permanent digital registry. Your wallet proves ownership and authorizes all transactions.',
             },
             {
                 id: 'd',
-                question: 'Is my data secure on the blockchain?',
-                answer: 'Yes! All data is stored on the blockchain, making it transparent, immutable, and secure. Our smart contract includes security measures like owner restrictions and input validation to protect the integrity of the platform.',
+                question: 'Is my pet data secure on the blockchain?',
+                answer: 'Absolutely! Pet records are stored permanently on the blockchain with cryptographic security. The data is immutable, publicly verifiable, and includes built-in validation to ensure data integrity and prevent unauthorized modifications.',
             },
             {
                 id: 'e',
-                question: 'Can anyone add or modify pets?',
-                answer: 'Any connected user can add new pets and edit existing ones. However, only the contract owner can remove pets. This balance ensures community participation while preventing abuse.',
+                question: 'Who can register pets in the catalog?',
+                answer: 'Any user with a connected wallet can register new pets and update existing pet information. Only the contract owner has permission to remove pets from the catalog, ensuring data integrity and preventing misuse.'
             },
             {
                 id: 'f',
-                question: 'What blockchain network do you use?',
-                answer: 'Our platform is built on Ethereum-compatible networks. Make sure your wallet is connected to the correct network to interact with our smart contract properly.',
+                question: 'What information is stored for each pet?',
+                answer: 'Each pet record includes the pet\'s name, detailed description, and birth year. All information is permanently stored on-chain and can be updated by users while maintaining a complete history of changes.'
             },
         ];
 
@@ -487,8 +487,8 @@ const Home = () => {
                                 Frequently Asked Questions
                             </Heading>
                             <Text fontSize="lg" color="gray.600">
-                                Got questions? We have answers. Learn more about
-                                our platform and how it works.
+                                Got questions about pet registration? Learn how our
+                                decentralized catalog works and keeps your pet data secure.
                             </Text>
                         </Box>
 
@@ -547,8 +547,8 @@ const Home = () => {
                         <VStack align="start" gap={4}>
                             <Heading size="md">Pet Dex Catalog</Heading>
                             <Text fontSize="sm" color="gray.400">
-                                A decentralized platform for discovering and
-                                managing cutting-edge pets on the blockchain.
+                                A decentralized pet registry providing secure,
+                                verifiable records for pet ownership and information.
                             </Text>
                         </VStack>
 
@@ -564,7 +564,7 @@ const Home = () => {
                                     _hover={{ color: 'white' }}
                                 >
                                     <RouterLink to="/pets">
-                                        View Pets
+                                        Browse Catalog
                                     </RouterLink>
                                 </Link>
                                 <Link
@@ -574,7 +574,7 @@ const Home = () => {
                                     _hover={{ color: 'white' }}
                                 >
                                     <RouterLink to="/add-pet">
-                                        Add Pet
+                                        Register Pet
                                     </RouterLink>
                                 </Link>
                             </Stack>
@@ -648,7 +648,7 @@ const Home = () => {
                         w="full"
                     >
                         <Text fontSize="sm" color="gray.400">
-                            © 2024 Pet Dex Catalog. Built on blockchain pet.
+                            © 2024 Pet Dex Catalog. Built on blockchain technology.
                         </Text>
                         <HStack gap={6}>
                             <Link
