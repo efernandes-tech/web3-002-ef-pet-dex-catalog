@@ -1,30 +1,30 @@
 import { toaster } from '@/components/ui/Toaster';
 import { useContract } from '@/hooks/useContract';
-import type { Tech } from '@/types/contract.types';
+import type { Pet } from '@/types/contract.types';
 import { Center, Container, Heading, VStack } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import TechForm from '../components/TechForm';
+import PetForm from '../components/PetForm';
 
-const AddTech = () => {
-    const { addTech, isConnected } = useContract();
+const AddPet = () => {
+    const { addPet, isConnected } = useContract();
     const navigate = useNavigate();
 
-    const handleAddTech = async (tech: Tech) => {
+    const handleAddPet = async (pet: Pet) => {
         try {
-            await addTech(tech);
+            await addPet(pet);
             toaster.create({
                 title: 'Success!',
-                description: 'Technology added successfully',
+                description: 'Pet added successfully',
                 type: 'success',
                 duration: 3000,
                 closable: true,
             });
-            navigate('/technologies');
+            navigate('/pets');
         } catch (error) {
-            console.error('handleAddTech ~ error:', error);
+            console.error('handleAddPet ~ error:', error);
             toaster.create({
                 title: 'Error',
-                description: 'Failed to add technology',
+                description: 'Failed to add pet',
                 type: 'error',
                 duration: 3000,
                 closable: true,
@@ -47,11 +47,11 @@ const AddTech = () => {
     return (
         <Container maxW="2xl" py={8}>
             <VStack gap={6} align="stretch">
-                <Heading size="xl">Add New Technology</Heading>
-                <TechForm onSubmit={handleAddTech} />
+                <Heading size="xl">Add New Pet</Heading>
+                <PetForm onSubmit={handleAddPet} />
             </VStack>
         </Container>
     );
 };
 
-export default AddTech;
+export default AddPet;

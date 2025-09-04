@@ -1,24 +1,24 @@
 import { useContract } from '@/hooks/useContract';
-import type { TechWithId } from '@/types/contract.types';
+import type { PetWithId } from '@/types/contract.types';
 import { Center, Container, Heading, Spinner, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import TechList from './components/TechList';
+import PetList from './components/PetList';
 
-const Tech = () => {
-    const { removeTech, getAllTechs, isConnected } = useContract();
-    const [techs, setTechs] = useState<TechWithId[]>([]);
+const Pets = () => {
+    const { removePet, getAllPets, isConnected } = useContract();
+    const [pets, setPets] = useState<PetWithId[]>([]);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const loadTechs = async () => {
+    const loadPets = async () => {
         if (!isConnected) return;
         setLoading(true);
         try {
-            const allTechs = await getAllTechs();
-            setTechs(allTechs);
+            const allPets = await getAllPets();
+            setPets(allPets);
         } catch (error) {
-            console.error('Failed to load techs:', error);
+            console.error('Failed to load pets:', error);
         } finally {
             setLoading(false);
         }
@@ -26,23 +26,22 @@ const Tech = () => {
 
     useEffect(() => {
         if (isConnected) {
-            loadTechs();
+            loadPets();
         }
     }, [isConnected]);
 
-    const handleEdit = (tech: TechWithId) => {
-        navigate(`/edit-tech/${tech.id}`, { state: { tech } });
+    const handleEdit = (pet: PetWithId) => {
+        navigate(`/edit-pet/${pet.id}`, { state: { pet } });
     };
 
     const handleDelete = async (id: number) => {
-        if (!confirm('Are you sure you want to delete this technology?'))
-            return;
+        if (!confirm('Are you sure you want to delete this pet?')) return;
         try {
-            await removeTech(id);
-            await loadTechs();
+            await removePet(id);
+            await loadPets();
         } catch (error) {
             console.error('handleDelete ~ error:', error);
-            alert('Failed to delete technology');
+            alert('Failed to delete pet');
         }
     };
 
@@ -61,15 +60,15 @@ const Tech = () => {
     return (
         <Container maxW="7xl" py={8}>
             <VStack gap={6} align="stretch">
-                <Heading size="xl">All Technologies</Heading>
+                <Heading size="xl">All Petnologies</Heading>
 
                 {loading ? (
                     <Center>
                         <Spinner size="lg" />
                     </Center>
                 ) : (
-                    <TechList
-                        techs={techs}
+                    <PetList
+                        pets={pets}
                         onEdit={handleEdit}
                         onDelete={handleDelete}
                     />
@@ -79,4 +78,4 @@ const Tech = () => {
     );
 };
 
-export default Tech;
+export default Pets;

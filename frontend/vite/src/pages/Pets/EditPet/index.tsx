@@ -1,64 +1,64 @@
 import { toaster } from '@/components/ui/Toaster';
 import { useContract } from '@/hooks/useContract';
-import type { Tech, TechWithId } from '@/types/contract.types';
+import type { Pet, PetWithId } from '@/types/contract.types';
 import { Center, Container, Heading, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import TechForm from '../components/TechForm';
+import PetForm from '../components/PetForm';
 
-const EditTech = () => {
+const EditPet = () => {
     const { id } = useParams<{ id: string }>();
     const location = useLocation();
     const navigate = useNavigate();
-    const { editTech, getTech, isConnected } = useContract();
-    const [tech, setTech] = useState<TechWithId | null>(
-        location.state?.tech || null,
+    const { editPet, getPet, isConnected } = useContract();
+    const [pet, setPet] = useState<PetWithId | null>(
+        location.state?.pet || null,
     );
 
     useEffect(() => {
-        if (!tech && id && isConnected) {
-            const fetchTech = async () => {
+        if (!pet && id && isConnected) {
+            const fetchPet = async () => {
                 try {
-                    const fetchedTech = await getTech(Number(id));
-                    if (fetchedTech) {
-                        setTech(fetchedTech);
+                    const fetchedPet = await getPet(Number(id));
+                    if (fetchedPet) {
+                        setPet(fetchedPet);
                     } else {
                         toaster.create({
                             title: 'Error',
-                            description: 'Technology not found',
+                            description: 'Pet not found',
                             type: 'error',
                             duration: 3000,
                             closable: true,
                         });
-                        navigate('/technologies');
+                        navigate('/pets');
                     }
                 } catch (error) {
-                    console.error('Failed to fetch tech:', error);
-                    navigate('/technologies');
+                    console.error('Failed to fetch pet:', error);
+                    navigate('/pets');
                 }
             };
-            fetchTech();
+            fetchPet();
         }
-    }, [id, tech, isConnected]);
+    }, [id, pet, isConnected]);
 
-    const handleEditTech = async (updatedTech: Tech) => {
-        if (!tech) return;
+    const handleEditPet = async (updatedPet: Pet) => {
+        if (!pet) return;
 
         try {
-            await editTech(tech.id, updatedTech);
+            await editPet(pet.id, updatedPet);
             toaster.create({
                 title: 'Success!',
-                description: 'Technology updated successfully',
+                description: 'Pet updated successfully',
                 type: 'success',
                 duration: 3000,
                 closable: true,
             });
-            navigate('/technologies');
+            navigate('/pets');
         } catch (error) {
-            console.error('handleEditTech ~ error:', error);
+            console.error('handleEditPet ~ error:', error);
             toaster.create({
                 title: 'Error',
-                description: 'Failed to update technology',
+                description: 'Failed to update pet',
                 type: 'error',
                 duration: 3000,
                 closable: true,
@@ -78,7 +78,7 @@ const EditTech = () => {
         );
     }
 
-    if (!tech) {
+    if (!pet) {
         return (
             <Container maxW="7xl" py={12}>
                 <Center>
@@ -91,10 +91,10 @@ const EditTech = () => {
     return (
         <Container maxW="2xl" py={8}>
             <VStack gap={6} align="stretch">
-                <Heading size="xl">Edit Technology</Heading>
-                <TechForm
-                    onSubmit={handleEditTech}
-                    initialTech={tech}
+                <Heading size="xl">Edit Pet</Heading>
+                <PetForm
+                    onSubmit={handleEditPet}
+                    initialPet={pet}
                     isEditing={true}
                 />
             </VStack>
@@ -102,4 +102,4 @@ const EditTech = () => {
     );
 };
 
-export default EditTech;
+export default EditPet;

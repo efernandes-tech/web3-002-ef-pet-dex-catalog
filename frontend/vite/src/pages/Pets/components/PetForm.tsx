@@ -1,4 +1,4 @@
-import type { Tech } from '@/types/contract.types';
+import type { Pet } from '@/types/contract.types';
 import {
     Box,
     Button,
@@ -11,28 +11,24 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
-interface TechFormProps {
-    onSubmit: (tech: Tech) => void;
-    initialTech?: Tech;
+interface PetFormProps {
+    onSubmit: (pet: Pet) => void;
+    initialPet?: Pet;
     isEditing?: boolean;
 }
 
-const TechForm = ({
-    onSubmit,
-    initialTech,
-    isEditing = false,
-}: TechFormProps) => {
-    const [name, setName] = useState(initialTech?.name || '');
+const PetForm = ({ onSubmit, initialPet, isEditing = false }: PetFormProps) => {
+    const [name, setName] = useState(initialPet?.name || '');
     const [description, setDescription] = useState(
-        initialTech?.description || '',
+        initialPet?.description || '',
     );
-    const [adopters, setAdouters] = useState<number>(
-        initialTech?.adopters || 0,
+    const [yearBirth, setAdouters] = useState<number>(
+        initialPet?.yearBirth || 0,
     );
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        onSubmit({ name, description, adopters });
+        onSubmit({ name, description, yearBirth });
         if (!isEditing) {
             setName('');
             setDescription('');
@@ -43,7 +39,7 @@ const TechForm = ({
     return (
         <Box bg="white" p={6} borderRadius="lg" boxShadow="md">
             <Heading size="lg" mb={4}>
-                {isEditing ? 'Edit Tech' : 'Add New Tech'}
+                {isEditing ? 'Edit Pet' : 'Add New Pet'}
             </Heading>
 
             <form onSubmit={handleSubmit}>
@@ -53,7 +49,7 @@ const TechForm = ({
                         <Input
                             value={name}
                             onChange={e => setName(e.target.value)}
-                            placeholder="Technology name"
+                            placeholder="Pet name"
                         />
                     </Field.Root>
 
@@ -62,7 +58,7 @@ const TechForm = ({
                         <Textarea
                             value={description}
                             onChange={e => setDescription(e.target.value)}
-                            placeholder="Technology description"
+                            placeholder="Pet description"
                             rows={3}
                         />
                     </Field.Root>
@@ -70,7 +66,7 @@ const TechForm = ({
                     <Field.Root required>
                         <Field.Label>Adopters</Field.Label>
                         <NumberInput.Root
-                            value={adopters.toString()}
+                            value={yearBirth.toString()}
                             min={0}
                             onValueChange={e =>
                                 setAdouters(e.valueAsNumber || 0)
@@ -86,7 +82,7 @@ const TechForm = ({
                         size="lg"
                         width="full"
                     >
-                        {isEditing ? 'Update Tech' : 'Add Tech'}
+                        {isEditing ? 'Update Pet' : 'Add Pet'}
                     </Button>
                 </VStack>
             </form>
@@ -94,4 +90,4 @@ const TechForm = ({
     );
 };
 
-export default TechForm;
+export default PetForm;

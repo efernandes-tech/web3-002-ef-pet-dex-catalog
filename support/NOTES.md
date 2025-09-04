@@ -1,5 +1,3 @@
-# web3-002-ef-techs-for-dummies
-
 # Notes:
 
 -   ...
@@ -11,7 +9,7 @@
 -   Deploy
     -   https://www.infura.io
     -   https://sepolia.etherscan.io
-    -   Deployed Addresses: 0x98E675928B647F7d3059a442526ad5FA07f5cA9C
+    -   Deployed Addresses: 0x825829bA0B52e53857d645090e040d20580f3493
 -   API_KEY to verify
     -   https://etherscan.io
-    -   https://sepolia.etherscan.io/address/0x98E675928B647F7d3059a442526ad5FA07f5cA9C#code
+    -   https://sepolia.etherscan.io/address/0x825829bA0B52e53857d645090e040d20580f3493#code

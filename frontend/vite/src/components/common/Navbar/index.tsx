@@ -40,8 +40,11 @@ const Navbar = () => {
                         >
                             <RouterLink to="/">
                                 <Flex align="center" gap={2}>
-                                    <Image src="ef-tfd.svg" width="36px" />
-                                    <Text>Techs For Dummies</Text>
+                                    <Image
+                                        src="ef-pet-dex-catalog.svg"
+                                        width="36px"
+                                    />
+                                    <Text>Pet Dex Catalog</Text>
                                 </Flex>
                             </RouterLink>
                         </Heading>
@@ -50,14 +53,12 @@ const Navbar = () => {
                             {isConnected && (
                                 <>
                                     <Button asChild variant="ghost" size="sm">
-                                        <RouterLink to="/technologies">
-                                            Technologies
-                                        </RouterLink>
+                                        <RouterLink to="/pets">Pets</RouterLink>
                                     </Button>
 
                                     <Button asChild variant="ghost" size="sm">
-                                        <RouterLink to="/add-tech">
-                                            Add Technology
+                                        <RouterLink to="/add-pet">
+                                            Add Pet
                                         </RouterLink>
                                     </Button>
 

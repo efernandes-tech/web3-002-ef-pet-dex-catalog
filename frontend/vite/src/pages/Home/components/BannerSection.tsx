@@ -16,7 +16,7 @@ const BannerSection = () => (
             <VStack gap={8}>
                 <Box>
                     <Heading size="4xl" color="gray.900" mb={6}>
-                        Techs For Dummies
+                        Pet Dex Catalog
                     </Heading>
                     <Text
                         fontSize="xl"
@@ -25,9 +25,9 @@ const BannerSection = () => (
                         mx="auto"
                         lineHeight="tall"
                     >
-                        Discover, manage, and track cutting-edge technologies on
-                        the blockchain. A decentralized platform built for
-                        technology enthusiasts.
+                        Discover, manage, and track cutting-edge pets on the
+                        blockchain. A decentralized platform built for pet
+                        enthusiasts.
                     </Text>
                 </Box>
 

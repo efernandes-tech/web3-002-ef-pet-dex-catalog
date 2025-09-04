@@ -1,4 +1,4 @@
-import type { TechWithId } from '@/types/contract.types';
+import type { PetWithId } from '@/types/contract.types';
 import {
     Badge,
     Button,
@@ -9,46 +9,46 @@ import {
     VStack,
 } from '@chakra-ui/react';
 
-interface TechListProps {
-    techs: TechWithId[];
-    onEdit: (tech: TechWithId) => void;
+interface PetListProps {
+    pets: PetWithId[];
+    onEdit: (pet: PetWithId) => void;
     onDelete: (id: number) => void;
 }
 
-const TechList = ({ techs, onEdit, onDelete }: TechListProps) => {
+const PetList = ({ pets, onEdit, onDelete }: PetListProps) => {
     return (
         <VStack gap={4} align="stretch">
-            <Heading size="lg">Technologies</Heading>
+            <Heading size="lg">Pets</Heading>
 
-            {techs.length === 0 ? (
-                <Text color="gray.500">No technologies found.</Text>
+            {pets.length === 0 ? (
+                <Text color="gray.500">No pets found.</Text>
             ) : (
                 <VStack gap={4}>
-                    {techs.map(tech => (
-                        <Card.Root key={tech.id} p={4} width="full">
+                    {pets.map(pet => (
+                        <Card.Root key={pet.id} p={4} width="full">
                             <HStack justify="space-between" align="start">
                                 <VStack align="start" flex={1} gap={2}>
                                     <Heading size="md" color="gray.900">
-                                        {tech.name}
+                                        {pet.name}
                                     </Heading>
                                     <Text color="gray.600">
-                                        {tech.description}
+                                        {pet.description}
                                     </Text>
                                     <Badge colorScheme="blue" variant="solid">
-                                        {tech.adopters} adopters
+                                        {pet.yearBirth} yearBirth
                                     </Badge>
                                 </VStack>
 
                                 <HStack gap={2}>
                                     <Button
-                                        onClick={() => onEdit(tech)}
+                                        onClick={() => onEdit(pet)}
                                         colorScheme="yellow"
                                         size="sm"
                                     >
                                         Edit
                                     </Button>
                                     <Button
-                                        onClick={() => onDelete(tech.id)}
+                                        onClick={() => onDelete(pet.id)}
                                         colorScheme="red"
                                         size="sm"
                                     >
@@ -64,4 +64,4 @@ const TechList = ({ techs, onEdit, onDelete }: TechListProps) => {
     );
 };
 
-export default TechList;
+export default PetList;

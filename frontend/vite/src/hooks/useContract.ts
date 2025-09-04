@@ -1,9 +1,9 @@
 import { useWallet } from '@/hooks/useWallet';
-import type { Tech, TechWithId } from '@/types/contract.types';
+import type { Pet, PetWithId } from '@/types/contract.types';
 import { CONTRACT_ADDRESS } from '@/utils/contract';
 import { ethers } from 'ethers';
 import { useMemo } from 'react';
-import { TechsForDummiesABI } from '../contracts/TechsForDummiesABI';
+import { PetDexCatalogABI } from '../contracts/PetDexCatalogABI';
 
 export const useContract = () => {
     const { signer, isConnected, ...walletProps } = useWallet();
@@ -11,80 +11,76 @@ export const useContract = () => {
     const contract = useMemo(() => {
         if (!signer || !isConnected) return null;
 
-        return new ethers.Contract(
-            CONTRACT_ADDRESS,
-            TechsForDummiesABI,
-            signer,
-        );
+        return new ethers.Contract(CONTRACT_ADDRESS, PetDexCatalogABI, signer);
     }, [signer, isConnected]);
 
-    const addTech = async (tech: Tech) => {
+    const addPet = async (pet: Pet) => {
         if (!contract) return;
         try {
-            const tx = await contract.addTech([
-                tech.name,
-                tech.description,
-                tech.adopters,
+            const tx = await contract.addPet([
+                pet.name,
+                pet.description,
+                pet.yearBirth,
             ]);
             await tx.wait();
         } catch (error) {
-            console.error('Failed to add tech:', error);
+            console.error('Failed to add pet:', error);
             throw error;
         }
     };
 
-    const editTech = async (id: number, tech: Tech) => {
+    const editPet = async (id: number, pet: Pet) => {
         if (!contract) return;
         try {
-            const tx = await contract.editTech(id, [
-                tech.name,
-                tech.description,
-                tech.adopters,
+            const tx = await contract.editPet(id, [
+                pet.name,
+                pet.description,
+                pet.yearBirth,
             ]);
             await tx.wait();
         } catch (error) {
-            console.error('Failed to edit tech:', error);
+            console.error('Failed to edit pet:', error);
             throw error;
         }
     };
 
-    const removeTech = async (id: number) => {
+    const removePet = async (id: number) => {
         if (!contract) return;
         try {
-            const tx = await contract.removeTech(id);
+            const tx = await contract.removePet(id);
             await tx.wait();
         } catch (error) {
-            console.error('Failed to remove tech:', error);
+            console.error('Failed to remove pet:', error);
             throw error;
         }
     };
 
-    const getTech = async (id: number): Promise<TechWithId | null> => {
+    const getPet = async (id: number): Promise<PetWithId | null> => {
         if (!contract) return null;
         try {
-            const [name, description, adopters] = await contract.techs(id);
+            const [name, description, yearBirth] = await contract.pets(id);
             if (!name) return null;
-            return { id, name, description, adopters: Number(adopters) };
+            return { id, name, description, yearBirth: Number(yearBirth) };
         } catch (error) {
-            console.error('Failed to get tech:', error);
+            console.error('Failed to get pet:', error);
             return null;
         }
     };
 
-    const getAllTechs = async (): Promise<TechWithId[]> => {
+    const getAllPets = async (): Promise<PetWithId[]> => {
         if (!contract) return [];
         try {
             const count = await contract.count();
-            const techs: TechWithId[] = [];
+            const pets: PetWithId[] = [];
 
             for (let i = 1; i <= Number(count); i++) {
-                const tech = await getTech(i);
-                if (tech) techs.push(tech);
+                const pet = await getPet(i);
+                if (pet) pets.push(pet);
             }
 
-            return techs;
+            return pets;
         } catch (error) {
-            console.error('Failed to get all techs:', error);
+            console.error('Failed to get all pets:', error);
             return [];
         }
     };
@@ -92,11 +88,11 @@ export const useContract = () => {
     return {
         ...walletProps,
         contract,
-        addTech,
-        editTech,
-        removeTech,
-        getTech,
-        getAllTechs,
+        addPet,
+        editPet,
+        removePet,
+        getPet,
+        getAllPets,
         isConnected,
     };
 };

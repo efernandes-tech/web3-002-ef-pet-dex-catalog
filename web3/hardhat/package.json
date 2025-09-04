@@ -1,13 +1,14 @@
 {
-  "name": "ef-techs-for-dummies",
+  "name": "ef-pet-dex-catalog",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "npx hardhat node",
+    "compile": "npx hardhat compile",
     "test": "npx hardhat test",
-    "deploy:dev": "npx hardhat ignition deploy ignition/modules/TechsForDummies.ts --network local",
-    "deploy:prod": "npx hardhat ignition deploy ignition/modules/TechsForDummies.ts --network sepolia"
+    "deploy:dev": "npx hardhat ignition deploy ignition/modules/PetDexCatalog.ts --network local",
+    "deploy:prod": "npx hardhat ignition deploy ignition/modules/PetDexCatalog.ts --network sepolia"
   },
   "keywords": [],
   "author": "efernandes.tech",

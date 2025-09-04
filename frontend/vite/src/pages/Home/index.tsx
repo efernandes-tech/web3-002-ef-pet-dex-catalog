@@ -67,7 +67,7 @@ const Home = () => {
                 <VStack gap={8}>
                     <Box>
                         <Heading size="4xl" color="gray.900" mb={6}>
-                            Techs For Dummies
+                            Pet Dex Catalog
                         </Heading>
                         <Text
                             fontSize="xl"
@@ -76,9 +76,9 @@ const Home = () => {
                             mx="auto"
                             lineHeight="tall"
                         >
-                            Discover, manage, and track cutting-edge
-                            technologies on the blockchain. A decentralized
-                            platform built for technology enthusiasts.
+                            Discover, manage, and track cutting-edge pets on the
+                            blockchain. A decentralized platform built for pet
+                            enthusiasts.
                         </Text>
                     </Box>
 
@@ -137,8 +137,8 @@ const Home = () => {
                         </Heading>
                         <Text fontSize="lg" color="gray.600" maxW="2xl">
                             Start your journey by connecting your Web3 wallet to
-                            interact with our smart contract and manage
-                            technologies on the blockchain.
+                            interact with our smart contract and manage pets on
+                            the blockchain.
                         </Text>
                     </Box>
 
@@ -154,8 +154,7 @@ const Home = () => {
                                     </Box>
                                     <Text color="gray.600">
                                         Connect your wallet to access all
-                                        features and start managing
-                                        technologies.
+                                        features and start managing pets.
                                     </Text>
                                     <Button
                                         onClick={handleConnectWallet}
@@ -219,8 +218,8 @@ const Home = () => {
                                             size="lg"
                                             w="full"
                                         >
-                                            <RouterLink to="/technologies">
-                                                View Technologies{' '}
+                                            <RouterLink to="/pets">
+                                                View Pets{' '}
                                                 <ChevronRight size={16} />
                                             </RouterLink>
                                         </Button>
@@ -231,8 +230,8 @@ const Home = () => {
                                             size="md"
                                             w="full"
                                         >
-                                            <RouterLink to="/add-tech">
-                                                Add New Technology
+                                            <RouterLink to="/add-pet">
+                                                Add New Pet
                                             </RouterLink>
                                         </Button>
                                     </VStack>
@@ -254,7 +253,7 @@ const Home = () => {
                             Understanding Our Smart Contract
                         </Heading>
                         <Text fontSize="lg" color="gray.600" maxW="3xl">
-                            Learn how our TechsForDummies.sol contract works and
+                            Learn how our PetDexCatalog.sol contract works and
                             what makes it secure and efficient.
                         </Text>
                     </Box>
@@ -281,15 +280,14 @@ const Home = () => {
                                                 fontWeight="semibold"
                                                 color="gray.700"
                                             >
-                                                addTech()
+                                                addPet()
                                             </Text>
                                             <Text
                                                 fontSize="sm"
                                                 color="gray.600"
                                             >
-                                                Adds new technology entries with
-                                                name, description, and adopter
-                                                count
+                                                Adds new pet entries with name,
+                                                description, and adopter count
                                             </Text>
                                         </Box>
                                         <Box>
@@ -297,14 +295,14 @@ const Home = () => {
                                                 fontWeight="semibold"
                                                 color="gray.700"
                                             >
-                                                editTech()
+                                                editPet()
                                             </Text>
                                             <Text
                                                 fontSize="sm"
                                                 color="gray.600"
                                             >
-                                                Updates existing technology
-                                                information with validation
+                                                Updates existing pet information
+                                                with validation
                                             </Text>
                                         </Box>
                                         <Box>
@@ -312,14 +310,14 @@ const Home = () => {
                                                 fontWeight="semibold"
                                                 color="gray.700"
                                             >
-                                                removeTech()
+                                                removePet()
                                             </Text>
                                             <Text
                                                 fontSize="sm"
                                                 color="gray.600"
                                             >
                                                 Owner-only function to remove
-                                                technologies (restricted access)
+                                                pets (restricted access)
                                             </Text>
                                         </Box>
                                     </VStack>
@@ -423,13 +421,13 @@ const Home = () => {
                                                 fontSize="sm"
                                                 color="gray.700"
                                             >
-                                                struct Tech &#123;
+                                                struct Pet &#123;
                                                 <br />
                                                 &nbsp;&nbsp;string name;
                                                 <br />
                                                 &nbsp;&nbsp;string description;
                                                 <br />
-                                                &nbsp;&nbsp;uint32 adopters;
+                                                &nbsp;&nbsp;uint32 yearBirth;
                                                 <br />
                                                 &#125;
                                             </Text>
@@ -450,8 +448,8 @@ const Home = () => {
         const faqs = [
             {
                 id: 'a',
-                question: 'What is Techs For Dummies?',
-                answer: 'Techs For Dummies is a decentralized platform built on blockchain technology that allows users to discover, manage, and track cutting-edge technologies. It uses smart contracts to ensure transparency and community governance.',
+                question: 'What is Pet Dex Catalog?',
+                answer: 'Pet Dex Catalog is a decentralized platform built on blockchain pet that allows users to discover, manage, and track cutting-edge pets. It uses smart contracts to ensure transparency and community governance.',
             },
             {
                 id: 'b',
@@ -461,7 +459,7 @@ const Home = () => {
             {
                 id: 'c',
                 question: 'What can I do with my connected wallet?',
-                answer: 'Once connected, you can add new technologies to the platform, view existing technologies, edit technology information, and interact with our smart contract. Your wallet serves as your identity and authorization method.',
+                answer: 'Once connected, you can add new pets to the platform, view existing pets, edit pet information, and interact with our smart contract. Your wallet serves as your identity and authorization method.',
             },
             {
                 id: 'd',
@@ -470,8 +468,8 @@ const Home = () => {
             },
             {
                 id: 'e',
-                question: 'Can anyone add or modify technologies?',
-                answer: 'Any connected user can add new technologies and edit existing ones. However, only the contract owner can remove technologies. This balance ensures community participation while preventing abuse.',
+                question: 'Can anyone add or modify pets?',
+                answer: 'Any connected user can add new pets and edit existing ones. However, only the contract owner can remove pets. This balance ensures community participation while preventing abuse.',
             },
             {
                 id: 'f',
@@ -496,14 +494,7 @@ const Home = () => {
 
                         <Accordion.Root multiple defaultValue={['a']} w="full">
                             {faqs.map((faq, index) => (
-                                <Accordion.Item
-                                    key={index}
-                                    value={faq.id}
-                                    // border="1px"
-                                    // borderColor="gray.200"
-                                    // rounded="md"
-                                    // mb={2}
-                                >
+                                <Accordion.Item key={index} value={faq.id}>
                                     <Accordion.ItemTrigger
                                         bg="white"
                                         _hover={{ bg: 'gray.50' }}
@@ -554,11 +545,10 @@ const Home = () => {
                         divideColor="gray.700"
                     >
                         <VStack align="start" gap={4}>
-                            <Heading size="md">Techs For Dummies</Heading>
+                            <Heading size="md">Pet Dex Catalog</Heading>
                             <Text fontSize="sm" color="gray.400">
                                 A decentralized platform for discovering and
-                                managing cutting-edge technologies on the
-                                blockchain.
+                                managing cutting-edge pets on the blockchain.
                             </Text>
                         </VStack>
 
@@ -573,8 +563,8 @@ const Home = () => {
                                     color="gray.400"
                                     _hover={{ color: 'white' }}
                                 >
-                                    <RouterLink to="/technologies">
-                                        View Technologies
+                                    <RouterLink to="/pets">
+                                        View Pets
                                     </RouterLink>
                                 </Link>
                                 <Link
@@ -583,8 +573,8 @@ const Home = () => {
                                     color="gray.400"
                                     _hover={{ color: 'white' }}
                                 >
-                                    <RouterLink to="/add-tech">
-                                        Add Technology
+                                    <RouterLink to="/add-pet">
+                                        Add Pet
                                     </RouterLink>
                                 </Link>
                             </Stack>
@@ -617,7 +607,7 @@ const Home = () => {
                             </Heading>
                             <HStack gap={3}>
                                 <Link
-                                    href="https://github.com/efernandes-tech/web3-002-ef-techs-for-dummies"
+                                    href="https://github.com/efernandes-tech/web3-002-ef-pet-dex-catalog"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -658,8 +648,7 @@ const Home = () => {
                         w="full"
                     >
                         <Text fontSize="sm" color="gray.400">
-                            © 2024 Techs For Dummies. Built on blockchain
-                            technology.
+                            © 2024 Pet Dex Catalog. Built on blockchain pet.
                         </Text>
                         <HStack gap={6}>
                             <Link

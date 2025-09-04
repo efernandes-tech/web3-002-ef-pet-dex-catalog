@@ -1,9 +1,9 @@
-export interface Tech {
+export interface Pet {
     name: string;
     description: string;
-    adopters: number;
+    yearBirth: number;
 }
 
-export interface TechWithId extends Tech {
+export interface PetWithId extends Pet {
     id: number;
 }

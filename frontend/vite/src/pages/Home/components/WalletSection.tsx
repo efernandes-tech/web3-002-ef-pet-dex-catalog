@@ -33,8 +33,8 @@ const WalletSection = ({
                         </Heading>
                         <Text fontSize="lg" color="gray.600" maxW="2xl">
                             Start your journey by connecting your Web3 wallet to
-                            interact with our smart contract and manage
-                            technologies on the blockchain.
+                            interact with our smart contract and manage pets on
+                            the blockchain.
                         </Text>
                     </Box>
 
@@ -50,8 +50,7 @@ const WalletSection = ({
                                     </Box>
                                     <Text color="gray.600">
                                         Connect your wallet to access all
-                                        features and start managing
-                                        technologies.
+                                        features and start managing pets.
                                     </Text>
                                     <Button
                                         onClick={onConnectWallet}
@@ -110,8 +109,8 @@ const WalletSection = ({
                                             size="lg"
                                             w="full"
                                         >
-                                            <RouterLink to="/technologies">
-                                                View Technologies{' '}
+                                            <RouterLink to="/pets">
+                                                View Pets{' '}
                                                 <ChevronRight size={16} />
                                             </RouterLink>
                                         </Button>
@@ -122,8 +121,8 @@ const WalletSection = ({
                                             size="md"
                                             w="full"
                                         >
-                                            <RouterLink to="/add-tech">
-                                                Add New Technology
+                                            <RouterLink to="/add-pet">
+                                                Add New Pet
                                             </RouterLink>
                                         </Button>
                                     </VStack>

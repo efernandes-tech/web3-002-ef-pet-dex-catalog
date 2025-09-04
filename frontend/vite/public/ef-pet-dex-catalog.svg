@@ -1,0 +1,23 @@
+<!-- PetDexCatalog Icon: Paw + Web3 Block -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="48" height="48" viewBox="0 0 48 48"
+     aria-labelledby="title desc" role="img">
+  <title id="title">PetDexCatalog Web3 Icon</title>
+  <desc id="desc">A blockchain cube with a paw print inside, symbolizing pets on Web3.</desc>
+
+  <!-- Background -->
+  <rect width="48" height="48" fill="white"/>
+
+  <!-- Cube / Blockchain block -->
+  <path d="M12 14 L24 8 L36 14 L36 28 L24 34 L12 28 Z"
+        fill="none" stroke="#272A5B" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M12 14 L24 20 L36 14" stroke="#272A5B" stroke-width="2" fill="none"/>
+  <path d="M24 20 L24 34" stroke="#272A5B" stroke-width="2" fill="none"/>
+
+  <!-- Paw print inside block -->
+  <circle cx="24" cy="23" r="4" fill="#E67E22"/>
+  <circle cx="19.5" cy="19" r="1.8" fill="#E67E22"/>
+  <circle cx="24" cy="17.0" r="1.8" fill="#E67E22"/>
+  <circle cx="28.5" cy="19" r="1.8" fill="#E67E22"/>
+  <circle cx="24" cy="20.8" r="1.4" fill="#E67E22"/>
+</svg>
