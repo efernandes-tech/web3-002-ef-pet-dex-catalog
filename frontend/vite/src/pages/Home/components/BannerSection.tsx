@@ -12,7 +12,7 @@ import { Shield, Users, Zap } from 'lucide-react';
 
 const BannerSection = () => (
     <Box py={20} textAlign="center">
-        <Container maxW="6xl">
+        <Container maxW="7xl">
             <VStack gap={8}>
                 <Box>
                     <Heading size="4xl" color="gray.900" mb={6}>

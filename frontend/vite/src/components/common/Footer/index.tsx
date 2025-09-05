@@ -16,7 +16,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 const Footer = () => (
     <Box py={16} bg="gray.900" color="white">
-        <Container maxW="6xl">
+        <Container maxW="7xl">
             <VStack gap={12}>
                 <Grid
                     templateColumns={{ base: '1fr', md: 'repeat(4, 1fr)' }}

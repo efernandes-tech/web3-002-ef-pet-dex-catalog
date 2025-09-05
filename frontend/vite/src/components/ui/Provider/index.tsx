@@ -6,7 +6,7 @@ import { Toaster } from '../Toaster';
 export function Provider(props: ColorModeProviderProps) {
     return (
         <ChakraProvider value={system}>
-            <ColorModeProvider {...props} />
+            <ColorModeProvider {...props} defaultTheme="white" />
             <Toaster />
         </ChakraProvider>
     );

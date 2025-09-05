@@ -85,7 +85,7 @@ export default function Navbar() {
     return (
         <Box bg="white" boxShadow="sm" position="sticky" top={0} zIndex={10}>
             <Box px={4}>
-                <Container maxW="6xl">
+                <Container maxW="7xl">
                     <Flex
                         h={16}
                         alignItems="center"
@@ -102,8 +102,7 @@ export default function Navbar() {
                             {isOpen ? <X size={18} /> : <MenuIcon size={18} />}
                         </IconButton>
 
-                        <HStack gap={8} alignItems="center">
-                            {/* Logo */}
+                        <HStack gap={10} alignItems="center">
                             <Box>
                                 <RouterLink to="/">
                                     <Flex align="center" gap={2}>
@@ -123,7 +122,6 @@ export default function Navbar() {
                                 </RouterLink>
                             </Box>
 
-                            {/* Desktop Navigation */}
                             <HStack
                                 as="nav"
                                 gap={1}

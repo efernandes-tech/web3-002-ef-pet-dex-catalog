@@ -48,12 +48,12 @@ const AccountMenu = () => {
         <Menu.Root>
             <Menu.Trigger asChild>
                 <Button variant="outline" size="sm">
-                    <Wallet size={14} />
-                    <Text display={{ base: 'none', sm: 'block' }}>
+                    <Wallet color="black" size={14} />
+                    <Text color="black" display={{ base: 'none', sm: 'block' }}>
                         {account.slice(0, 6)}...
                         {account.slice(-4)}
                     </Text>
-                    <ChevronDown size={14} />
+                    <ChevronDown size={14} color="black" />
                 </Button>
             </Menu.Trigger>
             <Portal>

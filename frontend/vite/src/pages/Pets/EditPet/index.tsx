@@ -16,22 +16,19 @@ import {
 } from '@chakra-ui/react';
 import { AlertCircle, ArrowLeft, Edit, Wallet } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import PetForm from '../components/PetForm';
 
 const EditPet = () => {
     const { id } = useParams<{ id: string }>();
-    const location = useLocation();
     const navigate = useNavigate();
     const { editPet, getPet, isConnected } = useContract();
-    const [pet, setPet] = useState<PetWithId | null>(
-        location.state?.pet || null,
-    );
+    const [pet, setPet] = useState<PetWithId | null>(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [isFetching, setIsFetching] = useState(!pet && !!id);
+    const [isFetching, setIsFetching] = useState(!!id);
 
     useEffect(() => {
-        if (!pet && id && isConnected) {
+        if (id && isConnected) {
             const fetchPet = async () => {
                 setIsFetching(true);
                 try {
@@ -66,7 +63,7 @@ const EditPet = () => {
             };
             fetchPet();
         }
-    }, [id, pet, isConnected, getPet, navigate]);
+    }, [id, isConnected, getPet, navigate]);
 
     const handleEditPet = async (updatedPet: Pet) => {
         if (!pet) return;
