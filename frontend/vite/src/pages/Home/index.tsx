@@ -35,10 +35,53 @@ const Home = () => {
                 duration: 3000,
                 closable: true,
             });
-        } catch {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+            console.error('Wallet connection error:', error);
+
+            // Provide specific error messages based on error type
+            let title = 'Connection Failed';
+            let description = 'Failed to connect wallet. Please try again.';
+
+            switch (error.name) {
+                case 'BrowserNotSupported':
+                    title = 'Browser Not Supported';
+                    description =
+                        'Please use a Web3 compatible browser to continue.';
+                    break;
+                case 'WalletNotInstalled':
+                    title = 'Wallet Not Found';
+                    description =
+                        'Please install MetaMask or another Web3 wallet to continue.';
+                    break;
+                case 'UserRejected':
+                    title = 'Connection Rejected';
+                    description =
+                        'Please accept the connection request in your wallet.';
+                    break;
+                case 'RequestPending':
+                    title = 'Request Pending';
+                    description =
+                        'Please check your wallet for a pending connection request.';
+                    break;
+                case 'NoAccountsFound':
+                    title = 'No Accounts';
+                    description =
+                        'Please unlock your wallet and ensure you have at least one account.';
+                    break;
+                case 'WalletNotInitialized':
+                    title = 'Wallet Error';
+                    description = 'Please refresh the page and try again.';
+                    break;
+                default:
+                    description =
+                        error.message ||
+                        'Failed to connect wallet. Please try again.';
+            }
+
             toaster.create({
-                title: 'Connection Failed',
-                description: 'Failed to connect wallet. Please try again.',
+                title,
+                description,
                 type: 'error',
                 duration: 5000,
                 closable: true,
