@@ -5,18 +5,69 @@ import {
     Button,
     Container,
     Flex,
-    Heading,
     HStack,
+    IconButton,
     Image,
+    Stack,
     Text,
-    VStack,
 } from '@chakra-ui/react';
-import { Wallet } from 'lucide-react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Menu as MenuIcon, Wallet, X } from 'lucide-react';
+import { useState } from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import AccountMenu from './components/AccountMenu';
 
-const Navbar = () => {
+interface Props {
+    children: React.ReactNode;
+}
+
+interface NavLinkData {
+    name: string;
+    path: string;
+    requiresConnection?: boolean;
+}
+
+const Links: NavLinkData[] = [
+    { name: 'Home', path: '/' },
+    { name: 'Pets', path: '/pets', requiresConnection: true },
+    { name: 'Add Pet', path: '/add-pet', requiresConnection: true },
+];
+
+const NavLink = ({
+    children,
+    path,
+    onClick,
+}: Props & { path: string; onClick?: () => void }) => {
+    const location = useLocation();
+    const isActive = location.pathname === path;
+
+    return (
+        <Box
+            asChild
+            px={3}
+            py={2}
+            rounded="md"
+            fontWeight={isActive ? 'semibold' : 'medium'}
+            color={isActive ? 'blue.600' : 'gray.700'}
+            bg={isActive ? 'blue.50' : 'transparent'}
+            _hover={{
+                textDecoration: 'none',
+                bg: isActive ? 'blue.100' : 'gray.100',
+                color: isActive ? 'blue.700' : 'gray.900',
+            }}
+            transition="all 0.2s"
+            onClick={onClick}
+        >
+            <RouterLink to={path}>{children}</RouterLink>
+        </Box>
+    );
+};
+
+export default function Navbar() {
     const { chainId, isConnected, connectWallet } = useWallet();
+    const [isOpen, setIsOpen] = useState(false);
+
+    const onToggle = () => setIsOpen(!isOpen);
+    const onClose = () => setIsOpen(false);
 
     const getNetworkName = () => {
         const networks = {
@@ -27,67 +78,141 @@ const Navbar = () => {
         return networks[chainId as keyof typeof networks] || 'Unknown';
     };
 
+    const visibleLinks = Links.filter(
+        link => !link.requiresConnection || isConnected,
+    );
+
     return (
         <Box bg="white" boxShadow="sm" position="sticky" top={0} zIndex={10}>
-            <Container maxW="7xl" py={4}>
-                <VStack gap={0} align="stretch">
-                    <HStack justify="space-between" align="center">
-                        <Heading
-                            asChild
-                            size="lg"
-                            color="primary"
-                            _hover={{ color: 'secondary' }}
+            <Box px={4}>
+                <Container maxW="6xl">
+                    <Flex
+                        h={16}
+                        alignItems="center"
+                        justifyContent="space-between"
+                    >
+                        {/* Mobile menu button */}
+                        <IconButton
+                            size="md"
+                            aria-label="Toggle Menu"
+                            display={{ md: 'none' }}
+                            onClick={onToggle}
+                            variant="ghost"
                         >
-                            <RouterLink to="/">
-                                <Flex align="center" gap={2}>
-                                    <Image
-                                        src="ef-pet-dex-catalog.svg"
-                                        width="36px"
-                                    />
-                                    <Text>Pet Dex Catalog</Text>
-                                </Flex>
-                            </RouterLink>
-                        </Heading>
+                            {isOpen ? <X size={18} /> : <MenuIcon size={18} />}
+                        </IconButton>
 
-                        <HStack gap={4}>
-                            {isConnected && (
-                                <>
-                                    <Button asChild variant="ghost" size="sm">
-                                        <RouterLink to="/pets">Pets</RouterLink>
-                                    </Button>
+                        <HStack gap={8} alignItems="center">
+                            {/* Logo */}
+                            <Box>
+                                <RouterLink to="/">
+                                    <Flex align="center" gap={2}>
+                                        <Image
+                                            src="ef-pet-dex-catalog.svg"
+                                            width="32px"
+                                            alt="Pet Dex Logo"
+                                        />
+                                        <Text
+                                            fontSize="lg"
+                                            fontWeight="bold"
+                                            color="gray.800"
+                                        >
+                                            Pet Dex Catalog
+                                        </Text>
+                                    </Flex>
+                                </RouterLink>
+                            </Box>
 
-                                    <Button asChild variant="ghost" size="sm">
-                                        <RouterLink to="/add-pet">
-                                            Add Pet
-                                        </RouterLink>
-                                    </Button>
+                            {/* Desktop Navigation */}
+                            <HStack
+                                as="nav"
+                                gap={1}
+                                display={{ base: 'none', md: 'flex' }}
+                            >
+                                {visibleLinks.map(link => (
+                                    <NavLink key={link.name} path={link.path}>
+                                        {link.name}
+                                    </NavLink>
+                                ))}
+                            </HStack>
+                        </HStack>
 
-                                    {chainId && (
-                                        <Badge colorScheme="blue" size="sm">
-                                            {getNetworkName()}
-                                        </Badge>
-                                    )}
-
-                                    <AccountMenu />
-                                </>
+                        {/* Right side - Wallet & Account */}
+                        <Flex alignItems="center" gap={3}>
+                            {/* Network Badge */}
+                            {isConnected && chainId && (
+                                <Badge
+                                    colorScheme="blue"
+                                    size="sm"
+                                    px={2}
+                                    py={1}
+                                    borderRadius="md"
+                                    fontSize="xs"
+                                    display={{ base: 'none', sm: 'block' }}
+                                >
+                                    {getNetworkName()}
+                                </Badge>
                             )}
 
-                            {!isConnected && (
+                            {/* Account Menu or Connect Button */}
+                            {isConnected ? (
+                                <AccountMenu />
+                            ) : (
                                 <Button
                                     onClick={connectWallet}
                                     colorScheme="blue"
                                     size="sm"
                                 >
                                     <Wallet size={16} />
-                                    Connect Wallet
+                                    <Text
+                                        display={{ base: 'none', sm: 'block' }}
+                                    >
+                                        Connect Wallet
+                                    </Text>
+                                    <Text
+                                        display={{ base: 'block', sm: 'none' }}
+                                    >
+                                        Connect
+                                    </Text>
                                 </Button>
                             )}
-                        </HStack>
-                    </HStack>
-                </VStack>
-            </Container>
+                        </Flex>
+                    </Flex>
+                </Container>
+
+                {/* Mobile Navigation Menu */}
+                {isOpen && (
+                    <Box pb={4} display={{ md: 'none' }}>
+                        <Stack as="nav" gap={2}>
+                            {visibleLinks.map(link => (
+                                <NavLink
+                                    key={link.name}
+                                    path={link.path}
+                                    onClick={onClose}
+                                >
+                                    {link.name}
+                                </NavLink>
+                            ))}
+
+                            {/* Mobile Network Badge */}
+                            {isConnected && chainId && (
+                                <Box pt={2}>
+                                    <Badge
+                                        colorScheme="blue"
+                                        size="sm"
+                                        px={2}
+                                        py={1}
+                                        borderRadius="md"
+                                        fontSize="xs"
+                                    >
+                                        Network: {getNetworkName()}
+                                    </Badge>
+                                </Box>
+                            )}
+                        </Stack>
+                    </Box>
+                )}
+            </Box>
         </Box>
     );
-};
-
-export default Navbar;
+}

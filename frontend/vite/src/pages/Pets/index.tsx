@@ -60,7 +60,7 @@ const Pets = () => {
     return (
         <Container maxW="7xl" py={8}>
             <VStack gap={6} align="stretch">
-                <Heading size="xl">All Petnologies</Heading>
+                <Heading size="xl">All Pets</Heading>
 
                 {loading ? (
                     <Center>

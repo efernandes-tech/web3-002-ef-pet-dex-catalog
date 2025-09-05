@@ -1,6 +1,6 @@
 import { toaster } from '@/components/ui/Toaster';
-import { getExplorerUrl } from '@/utils/contract';
 import { useWallet } from '@/hooks/useWallet';
+import { getExplorerUrl } from '@/utils/contract';
 import { Button, Menu, Portal, Text } from '@chakra-ui/react';
 import {
     ChevronDown,
@@ -49,8 +49,10 @@ const AccountMenu = () => {
             <Menu.Trigger asChild>
                 <Button variant="outline" size="sm">
                     <Wallet size={14} />
-                    {account.slice(0, 6)}...
-                    {account.slice(-4)}
+                    <Text display={{ base: 'none', sm: 'block' }}>
+                        {account.slice(0, 6)}...
+                        {account.slice(-4)}
+                    </Text>
                     <ChevronDown size={14} />
                 </Button>
             </Menu.Trigger>
