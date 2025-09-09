@@ -30,7 +30,16 @@ npm install lucide-react
 ```
 
 ```cmd
+cd ./frontend/vite
 
+tar --exclude='*/node_modules*' \
+    --exclude='*/dist*' \
+    -cvf build-ef-pet-dex-catalog.tar .
+
+caprover deploy \
+  --caproverUrl https://caprover.edersonfernandes.tec.br \
+  --appName ef-pet-dex-catalog \
+  --tarFile ./build-ef-pet-dex-catalog.tar
 ```
 
 ```cmd
