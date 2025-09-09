@@ -7,10 +7,10 @@
 </h3>
 
 <p align="center">
-    <a href="https://github.com/efernandes-tech/scaffolds/commits/main">
-        <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/efernandes-tech/scaffolds">
+    <a href="https://github.com/efernandes-tech/web3-002-ef-pet-dex-catalog/commits/main">
+        <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/efernandes-tech/web3-002-ef-pet-dex-catalog">
     </a>
-    <img alt="Repository size" src="https://img.shields.io/github/repo-size/efernandes-tech/scaffolds">
+    <img alt="Repository size" src="https://img.shields.io/github/repo-size/efernandes-tech/web3-002-ef-pet-dex-catalog">
     <a href="https://edersonfernandes.com.br">
         <img alt="made by @efernandes-tech" src="https://img.shields.io/badge/Made%20by-@efernandes-tech-%2360F6AD">
     </a>
@@ -54,10 +54,11 @@ The application provides a user-friendly interface for pet enthusiasts to regist
 ### Pre-requisites
 
 Before you begin, you will need to have the following tools installed:
-- [Git](https://git-scm.com)
-- [Node.js](https://nodejs.org/en/) (v18+ recommended)
-- [MetaMask](https://metamask.io/) browser extension
-- A code editor like [Visual Studio Code](https://code.visualstudio.com/)
+
+-   [Git](https://git-scm.com)
+-   [Node.js](https://nodejs.org/en/) (v18+ recommended)
+-   [MetaMask](https://metamask.io/) browser extension
+-   A code editor like [Visual Studio Code](https://code.visualstudio.com/)
 
 #### Running the project
 
