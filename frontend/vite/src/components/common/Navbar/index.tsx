@@ -91,7 +91,6 @@ export default function Navbar() {
                         alignItems="center"
                         justifyContent="space-between"
                     >
-                        {/* Mobile menu button */}
                         <IconButton
                             size="md"
                             aria-label="Toggle Menu"
@@ -107,7 +106,7 @@ export default function Navbar() {
                                 <RouterLink to="/">
                                     <Flex align="center" gap={2}>
                                         <Image
-                                            src="ef-pet-dex-catalog.svg"
+                                            src="/ef-pet-dex-catalog.svg"
                                             width="32px"
                                             alt="Pet Dex Logo"
                                         />
@@ -135,9 +134,7 @@ export default function Navbar() {
                             </HStack>
                         </HStack>
 
-                        {/* Right side - Wallet & Account */}
                         <Flex alignItems="center" gap={3}>
-                            {/* Network Badge */}
                             {isConnected && chainId && (
                                 <Badge
                                     colorScheme="blue"
@@ -152,7 +149,6 @@ export default function Navbar() {
                                 </Badge>
                             )}
 
-                            {/* Account Menu or Connect Button */}
                             {isConnected ? (
                                 <AccountMenu />
                             ) : (
@@ -178,7 +174,6 @@ export default function Navbar() {
                     </Flex>
                 </Container>
 
-                {/* Mobile Navigation Menu */}
                 {isOpen && (
                     <Box pb={4} display={{ md: 'none' }}>
                         <Stack as="nav" gap={2}>
@@ -192,7 +187,6 @@ export default function Navbar() {
                                 </NavLink>
                             ))}
 
-                            {/* Mobile Network Badge */}
                             {isConnected && chainId && (
                                 <Box pt={2}>
                                     <Badge

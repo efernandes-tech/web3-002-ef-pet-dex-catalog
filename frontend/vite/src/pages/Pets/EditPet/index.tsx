@@ -151,7 +151,7 @@ const EditPet = () => {
                             size="sm"
                             onClick={() => navigate('/pets')}
                         >
-                            leftIcon={<ArrowLeft size={16} />}
+                            <ArrowLeft size={16} />
                             Back to Collection
                         </Button>
                     </HStack>
