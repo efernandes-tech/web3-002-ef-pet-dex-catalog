@@ -91,4 +91,36 @@ describe('PetDexCatalog', function () {
             "You don't have permission.",
         );
     });
+
+    it('Should edit same pet', async function () {
+        const { petDexCatalog, owner, otherAccount } = await loadFixture(
+            deployFixture,
+        );
+
+        await petDexCatalog.addPet({
+            name: 'Loki',
+            description: 'Small black dog who acts like a tiger.',
+            yearBirth: 2021,
+        });
+
+        await petDexCatalog.editPet(1, {
+            name: 'Thor',
+            description: 'Small yellow dog who acts like a lion.',
+            yearBirth: 2021,
+        });
+
+        const instance = petDexCatalog.connect(otherAccount);
+
+        await instance.editPet(1, {
+            name: 'Loki',
+            description: 'Small black dog who acts like a tiger.',
+            yearBirth: 2021,
+        });
+
+        const pet = await petDexCatalog.pets(1);
+        const petOtherAccount = await instance.pets(1);
+
+        expect(pet.name).to.equal('Loki');
+        expect(petOtherAccount.name).to.equal('Loki');
+    });
 });
