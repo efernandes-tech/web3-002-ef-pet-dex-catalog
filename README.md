@@ -1,9 +1,9 @@
 <h1 align="center">
-    <a href="#" alt="Project Name">Project Name</a>
+    <a href="#" alt="Pet Dex Catalog">Pet Dex Catalog</a>
 </h1>
 
 <h3 align="center">
-    Brief description of your project
+    A decentralized pet catalog application built with React and Ethereum smart contracts
 </h3>
 
 <p align="center">
@@ -17,7 +17,7 @@
 </p>
 
 <h4 align="center">
-    Status: In progress | Finished
+    Status: In progress
 </h4>
 
 <p align="center">
@@ -30,15 +30,22 @@
 
 ## About
 
-Description about your project and what it does.
+Pet Dex Catalog is a decentralized application (DApp) that allows users to create, manage, and explore a catalog of pets on the Ethereum blockchain. Built with React and TypeScript frontend and Solidity smart contracts, this application demonstrates the integration of modern web technologies with blockchain functionality.
+
+The application provides a user-friendly interface for pet enthusiasts to register their pets, view existing pets in the catalog, and interact with the blockchain directly through their wallet.
 
 ---
 
 ## Features
 
--   [x] Feature One
--   [x] Feature Two
--   [ ] Feature Three (in progress)
+-   [x] Add pets to the blockchain catalog with name, description, and birth year
+-   [x] View all registered pets in an interactive catalog
+-   [x] Edit pet information (restricted functionality)
+-   [x] Connect to MetaMask wallet for blockchain interactions
+-   [x] Mobile-responsive design with dark/light theme support
+-   [x] Smart contract deployment on local and testnet networks
+-   [ ] Remove pets from catalog (owner-only functionality)
+-   [ ] Enhanced pet attributes and media support
 
 ---
 
@@ -47,24 +54,52 @@ Description about your project and what it does.
 ### Pre-requisites
 
 Before you begin, you will need to have the following tools installed:
-[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/).
+- [Git](https://git-scm.com)
+- [Node.js](https://nodejs.org/en/) (v18+ recommended)
+- [MetaMask](https://metamask.io/) browser extension
+- A code editor like [Visual Studio Code](https://code.visualstudio.com/)
 
 #### Running the project
 
 ```bash
 # Clone this repository
-git clone https://github.com/efernandes-tech/scaffolds.git
+git clone <repository-url>
 
 # Access the project folder
-cd scaffolds
+cd web3-002-ef-pet-dex-catalog
 
-# Install dependencies
+# Install and start the local blockchain (Hardhat node)
+cd web3/hardhat
 npm install
+npm run start
 
-# Run the application
-npm start
+# In a new terminal, deploy the smart contract to local network
+npm run deploy:dev
 
-# The server will start at port: 3000 - go to http://localhost:3000
+# In another terminal, start the frontend application
+cd ../../frontend/vite
+npm install
+npm run dev
+
+# The application will start at: http://localhost:5173
+```
+
+#### Additional Commands
+
+```bash
+# Compile smart contracts
+cd web3/hardhat
+npm run compile
+
+# Run smart contract tests
+npm run test
+
+# Deploy to Sepolia testnet
+npm run deploy:prod
+
+# Build frontend for production
+cd ../../frontend/vite
+npm run build
 ```
 
 ---
@@ -73,29 +108,34 @@ npm start
 
 **Frontend:**
 
--   [React](https://reactjs.org/)
--   [TypeScript](https://www.typescriptlang.org/)
--   [Tailwind CSS](https://tailwindcss.com/)
+-   [React](https://reactjs.org/) - UI library
+-   [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
+-   [Vite](https://vitejs.dev/) - Build tool and development server
+-   [Chakra UI](https://chakra-ui.com/) - Component library
+-   [Ethers.js](https://ethers.org/) - Ethereum library for blockchain interaction
+-   [React Router](https://reactrouter.com/) - Client-side routing
 
-**Backend:**
+**Blockchain:**
 
--   [Node.js](https://nodejs.org/)
--   [Express](https://expressjs.com/)
--   [MongoDB](https://www.mongodb.com/)
+-   [Solidity](https://soliditylang.org/) - Smart contract programming language
+-   [Hardhat](https://hardhat.org/) - Ethereum development environment
+-   [Ethereum](https://ethereum.org/) - Blockchain platform
 
 **Tools:**
 
--   [Visual Studio Code](https://code.visualstudio.com/)
--   [Postman](https://www.postman.com/)
+-   [Visual Studio Code](https://code.visualstudio.com/) - Code editor
+-   [MetaMask](https://metamask.io/) - Ethereum wallet
+-   [ESLint](https://eslint.org/) - Code linting
+-   [Git](https://git-scm.com/) - Version control
 
 ---
 
 ## Author
 
 <a href="https://github.com/efernandes-tech">
-    <img style="border-radius: 50%;" src="https://github.com/efernandes-tech.png" width="100px;" alt="Your Name" />
+    <img style="border-radius: 50%;" src="https://github.com/efernandes-tech.png" width="100px;" alt="Ederson Fernandes" />
     <br />
-    <sub><b>Your Name</b></sub>
+    <sub><b>Ederson Fernandes</b></sub>
 </a>
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/efernandes-tech)
